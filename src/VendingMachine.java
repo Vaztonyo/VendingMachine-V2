@@ -5,10 +5,9 @@ import product_exceptions.sub_exceptions.SoftDrinksOutOfStockException;
 import products.*;
 
 public class VendingMachine {
-
-    public int saltySnackCounter = 0;
-    public int softDrinkCounter = 0;
-    public int chocolateCounter = 0;
+    private int saltySnackCounter = 0;
+    private int softDrinkCounter = 0;
+    private int chocolateCounter = 0;
 
     public void add(Product product, int add) {
         boolean condition = product instanceof SaltySnack || product instanceof Chocolate || product instanceof SoftDrink;
@@ -25,12 +24,10 @@ public class VendingMachine {
         }
     }
 
-    public void getStock() {
-        System.out.println(
-                "Salty Snacks available: " + saltySnackCounter +
+    public String getStock() {
+        return "Salty Snacks available: " + saltySnackCounter +
                         "\nSoft Drinks available: " + softDrinkCounter +
-                        "\nChocolates available: " + chocolateCounter
-        );
+                        "\nChocolates available: " + chocolateCounter;
     }
 
     public void buy(Product product) throws ProductNotFoundException {
@@ -72,22 +69,21 @@ public class VendingMachine {
 //            throw new SoftDrinksOutOfStockException("No Soft Drinks left in the Vending Machine");
 //        }
 //    }
-
-
+    
 
     public static void main(String[] args) {
         VendingMachine machine1 = new VendingMachine();
         machine1.add(new Chocolate("Cadbury"), 5);
         machine1.add(new SoftDrink("Fanta"), 5);
         machine1.add(new SaltySnack("Safari"), 5);
-        machine1.getStock();
-        System.out.println();
+        System.out.println( machine1.getStock());
         try {
+            machine1.buy(new SaltySnack("Safari"));
             machine1.buy(new SaltySnack("Safari"));
         } catch (ProductNotFoundException e) {
             e.printStackTrace();
         }
 
-        machine1.getStock();
+        System.out.println( machine1.getStock());
     }
 }
