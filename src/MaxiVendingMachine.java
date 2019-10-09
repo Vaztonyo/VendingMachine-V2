@@ -32,7 +32,7 @@ public class MaxiVendingMachine extends VendingMachine {
     }
 
     @Override
-    public void add(Product product, int add) {
+    public void addStock(Product product, int add) {
         throw new InvalidProductException("Not a valid product");
     }
 
@@ -49,6 +49,15 @@ public class MaxiVendingMachine extends VendingMachine {
     }
 
     public static void main(String[] args) {
-        VendingMachine maxiMachine = new MaxiVendingMachine();
+        MaxiVendingMachine maxiMachine = new MaxiVendingMachine();
+        Chocolate choc = new Chocolate("no");
+        maxiMachine.addStock(choc, 2);
+        System.out.println(maxiMachine.getStock());
+        try {
+            maxiMachine.buy(new SoftDrink("Coke"));
+        } catch (SoftDrinksOutOfStockException e) {
+            e.printStackTrace();
+        }
+        
     }
 }

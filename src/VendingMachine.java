@@ -7,7 +7,7 @@ public class VendingMachine {
     protected int softDrinkCounter = 0;
     protected int chocolateCounter = 0;
 
-    public void add(Product product, int add) {
+    public void addStock(Product product, int add) {
         boolean condition = product instanceof SaltySnack || product instanceof Chocolate || product instanceof SoftDrink;
         if (!condition){
             throw new InvalidProductException("Invalid Product");
@@ -26,6 +26,16 @@ public class VendingMachine {
         return "Salty Snacks available: " + saltySnackCounter +
                         "\nSoft Drinks available: " + softDrinkCounter +
                         "\nChocolates available: " + chocolateCounter;
+    }
+
+    public String getStock(Product product) {
+        if (product instanceof Chocolate){
+            return " Chocolates available: " + chocolateCounter;
+        } else if (product instanceof SaltySnack){
+            return "Salty Snacks available: " + saltySnackCounter;
+        } else {
+            return "Chocolates available: " + chocolateCounter;
+        }
     }
 
     public void buy(Product product) throws ProductNotFoundException {
